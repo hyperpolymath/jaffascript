@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: MPL-2.0
+# Jaffascript Ecosystem Definition
+
+[ecosystem]
+name = "AffineScript Jaffascript"
+id = "affinescript-jaffascript"
+description = "jaffascript-style syntax face for AffineScript providing familiar syntax for jaffascript developers"
+homepage = "https://github.com/hyperpolymath/jaffascript"
+
+[capabilities]
+supports = ["syntax-transform", "cli-shim", "examples", "documentation"]
+requires = ["affinescript"]
+
+[integration]
+face-name = "jaffascript"
+cli-binary = "jaffa"
+pragma-string = "// face: jaffascript"
+
+[status]
+maturity = "alpha"
+maintenance = "active"

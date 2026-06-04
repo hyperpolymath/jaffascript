@@ -1,0 +1,89 @@
+// SPDX-License-Identifier: MPL-2.0
+// Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+// SPDX-FileCopyrightText: 2024-2026 Jonathan D.A. Jewell (hyperpolymath)
+= JaffaScript - Face Repository
+:toc:
+:icons: font
+
+JaffaScript is a **face** (syntax surface) for link:https://github.com/hyperpolymath/affinescript[AffineScript].
+This document explains the repository structure and key concepts.
+
+== What is a "Face"?
+
+A face is a sugared surface syntax that lets developers approach AffineScript semantics
+through a familiar programming style. JaffaScript provides JavaScript/TypeScript-style
+syntax, but all faces compile to the same canonical AST and produce identical typed-wasm output.
+
+Key principle: *Different faces, same cube.*
+
+== Repository Structure
+
+[cols="1,2"]
+|===
+|Path |Purpose
+
+|`bin/jaffa` |CLI shim that forwards to `affinescript --face jaffa`
+|`examples/` |JaffaScript examples showing face-specific syntax
+|`docs/` |JaffaScript-focused documentation
+|`tests/` |Face transformer regression tests
+|`justfile` |Common tasks: `check`, `run`, `build`, `preview`, `lint`
+|`.github/` |GitHub workflows and issue templates
+|===
+
+== Key Concepts for JavaScript/TypeScript Developers
+
+[cols="1,2"]
+|===
+|JaffaScript |What it means in AffineScript
+
+|`function f() {}` |Function declaration (lowers to canonical `fn`)
+|`const x = ...` |Immutable binding (lowers to `let`)
+|`let x = ...` |Mutable binding (lowers to `let mut`)
+|`import {x} from "mod"` |Module import (lowers to `use` statement)
+|`===` and `!==` |Equality comparison (lowers to `==` and `!=`)
+|`null` / `undefined` |Unit value `()` in semantics-relevant positions
+|`// face: jaffascript` |Pragma declaring this file uses JaffaScript syntax
+|===
+
+WARNING: `null` and `undefined` in JavaScript/TypeScript are distinct from AffineScript's
+unit type `()`. The face transformer handles this mapping, but be aware that AffineScript
+has no null values — every value is guaranteed to be present and valid.
+
+== Terminology Differences
+
+[cols="1,2"]
+|===
+|JavaScript/TypeScript term |AffineScript equivalent
+
+|`undefined` |Unit `()` - absence of a meaningful value
+|`null` |Unit `()` - absence of a meaningful value
+|`any` type |Not applicable - AffineScript has no type escape hatches
+|`void` return type |`()` unit return type
+|`interface` |`type` or `record` (AffineScript uses structural typing)
+|`class` |`type` with methods (AffineScript has no OOP inheritance)
+|`async`/`await` |Not applicable - use AffineScript effects (`-{IO}->`)
+|`Promise<T>` |Not applicable - use AffineScript effects and `Result` types
+|`=>` arrow function |`fn` or `->` (canonical syntax)
+|`this` |Not applicable - AffineScript has no object orientation
+|`new` |Not applicable - AffineScript has no constructors
+|`static` |Not applicable - AffineScript has no classes
+|`private`/`public`/`protected` |Not applicable - AffineScript uses module system for encapsulation
+|===
+
+== Getting Help
+
+* Language questions: https://github.com/hyperpolymath/affinescript[affinescript repo]
+* JaffaScript-specific questions: https://github.com/hyperpolymath/jaffascript[This repo]
+* "How do I express X in AffineScript?": Check the canonical examples in affinescript/examples/
+
+== See Also
+
+* link:README.adoc[README] - Main documentation
+* link:https://github.com/hyperpolymath/affinescript[AffineScript] - Core compiler
+* link:https://github.com/hyperpolymath/affinescript/blob/main/examples/faces/README.adoc[Faces comparison]
+
+== License
+
+This project is licensed under the Mozilla Public License, v. 2.0. See the `LICENSE` file for details.
+
+SPDX-License-Identifier: MPL-2.0

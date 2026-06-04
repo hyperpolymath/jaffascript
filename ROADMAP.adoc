@@ -1,0 +1,70 @@
+// SPDX-License-Identifier: MPL-2.0
+// Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+// SPDX-FileCopyrightText: 2024-2026 Jonathan D.A. Jewell (hyperpolymath)
+= Jaffascript Roadmap
+
+This roadmap tracks Jaffascript development. Remember: Jaffascript is a *brand surface only*.
+Core language features are developed in the link:https://github.com/hyperpolymath/affinescript[affinescript] repository.
+
+== Current Status
+
+Alpha. The jaffascript face is established with:
+
+* CLI shim ()
+* justfile with common tasks
+* Examples in 
+* Documentation in  and 
+* EXPLAINME.adoc with terminology mapping
+
+== Milestones
+
+=== Phase 1: Face Transformer (Upstream in affinescript)
+* [ ] Implement  text transformer
+* [ ] Add jaffascript variant to  face type
+* [ ] Add jaffascript error vocabulary to  format functions
+* [ ] Register jaffascript in  parse_with_face
+* [ ] Add jaffascript to  name aliases
+* [ ] Create  debug command
+
+=== Phase 2: Documentation
+* [x] README.adoc with overview and examples
+* [x] EXPLAINME.adoc with terminology mapping
+* [ ] Quickstart guide for jaffascript developers
+* [ ] Migration guide from jaffascript to AffineScript
+* [ ] Style guide for idiomatic Jaffascript code
+
+=== Phase 3: Examples
+* [x] Basic hello world example
+* [ ] Data structures example (lists, records, variants)
+* [ ] Effect system example (IO, state, etc.)
+* [ ] FFI example (if applicable)
+* [ ] Real-world algorithm example
+
+=== Phase 4: Testing
+* [ ] Face transformer regression tests
+* [ ] Examples round-trip through transformer
+* [ ] Error message validation
+* [ ] Edge case coverage
+
+=== Phase 5: Tooling (Optional)
+* [ ] Language server integration
+* [ ] Syntax highlighting
+* [ ] Formatter configuration
+* [ ] Linter rules
+
+== Dependencies
+
+All milestones depend on upstream affinescript development. Jaffascript cannot release
+independently of affinescript.
+
+== Community
+
+* Questions: File issues in this repo for Jaffascript-specific questions
+* Language questions: File issues in affinescript repo
+* Contributions: See CONTRIBUTING.md
+
+== License
+
+MPL-2.0. See LICENSE.
+
+SPDX-License-Identifier: MPL-2.0
