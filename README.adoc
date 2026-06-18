@@ -1,6 +1,11 @@
-// SPDX-License-Identifier: AGPL-3.0-or-later
+// SPDX-License-Identifier: MPL-2.0
+// Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 // SPDX-FileCopyrightText: 2024-2026 Jonathan D.A. Jewell (hyperpolymath) <j.d.a.jewell@open.ac.uk>
 = JaffaScript
+image:https://img.shields.io/badge/OpenSSF-Best_Practices-green?logo=opensourcesecurity[OpenSSF Best Practices,link="https://www.bestpractices.dev/en/projects/new?repo_url=https://github.com/hyperpolymath/jaffascript"]
+
+image:https://img.shields.io/badge/License-MPL_2.0-blue.svg[License: MPL-2.0,link="https://opensource.org/licenses/MPL-2.0"]
+
 :toc: preamble
 :icons: font
 
@@ -8,14 +13,14 @@ JavaScript / TypeScript-syntax AffineScript. Write code that looks like JS or TS
 
 == What it is
 
-JaffaScript is link:https://github.com/hyperpolymath/affinescript[AffineScript] with its `jaffa` face pre-selected. If you write JavaScript or TypeScript, you already know most of the syntax. The compiler proves that resources are used exactly as many times as you declare — at compile time, with no runtime overhead.
+JaffaScript is link:https://github.com/hyperpolymath/affinescript[AffineScript] with its `jaffa` face pre-selected. If you write JavaScript or TypeScript, you already know most of the syntax. The compiler checks that your resources (files, sockets, tokens, handles) are used *exactly as many times as you declare* — and proves it at compile time. No null pointer exceptions. No use-after-free. No silent data races. No GC overhead.
 
 This repo is a **brand surface only**. The compiler, type checker, borrow checker, and codegen all live in link:https://github.com/hyperpolymath/affinescript[affinescript]. This repo carries:
 
 * Examples idiomatic to JS / TS developers
 * Documentation aimed at the web-development community
 * A `jaffa` shim CLI that aliases `affinescript --face jaffa`
-* Migration guides for moving TypeScript codebases to typed-wasm
+* Tutorial and migration guides for moving TypeScript codebases into a strongly-typed, affine-typed, WASM-targeting world
 
 == Hello
 
@@ -46,6 +51,8 @@ git clone https://github.com/hyperpolymath/jaffascript
 cd jaffascript
 ----
 
+The `affinescript` binary does the work. The `bin/jaffa` shim in this repo just defaults the `--face` flag.
+
 == Use
 
 [source,bash]
@@ -54,8 +61,9 @@ cd jaffascript
 affinescript eval --face jaffa examples/hello.affine
 affinescript compile --face jaffa examples/hello.affine -o hello.wasm
 
-# Or via the jaffa shim:
+# Or via the jaffa shim (same thing):
 ./bin/jaffa eval examples/hello.affine
+./bin/jaffa compile examples/hello.affine -o hello.wasm
 
 # Or via the justfile:
 just run examples/hello.affine
@@ -75,7 +83,7 @@ JaffaScript is one of six established faces over the AffineScript core:
 * link:https://github.com/hyperpolymath/cafescripto[CafeScripto] — CoffeeScript-style
 * link:https://github.com/hyperpolymath/pseudoscript[PseudoScript] — pseudocode-style
 
-All six share the canonical `.affine` extension and lower to the same AST.
+All six share the canonical `.affine` extension and lower to the same AST. Errors are reported in face-appropriate vocabulary.
 
 == Why JaffaScript
 
@@ -86,7 +94,7 @@ For a TypeScript developer migrating in, the steps are:
 1. Rename `.ts` files to `.affine` and add `// face: jaffascript` at the top.
 2. Replace `import { … } from "module"` (TS) with the same syntax in canonical AffineScript form.
 3. Replace `null`/`undefined` with `()` (canonical unit) in semantics-relevant positions.
-4. Drop the `===` for `==` (face transforms `===` → `==` automatically — you can keep writing `===`).
+4. Keep writing `===` — the face transforms `===` → `==` automatically.
 5. Compile to typed-wasm; the output runs in browsers, Node, Deno, Wasmtime, and any WASI runtime.
 
 == Status
@@ -95,4 +103,6 @@ Alpha. The face transformer is implemented in `affinescript/lib/js_face.ml`. Kno
 
 == License
 
-AGPL-3.0-or-later. See `LICENSE`.
+This project is licensed under the Mozilla Public License, v. 2.0. See the `LICENSE` file for details. Documentation is licensed CC-BY-SA-4.0.
+
+SPDX-License-Identifier: MPL-2.0
