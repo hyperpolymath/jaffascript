@@ -4,7 +4,7 @@ Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 -->
 <!-- SPDX-FileCopyrightText: 2024-2026 Jonathan D.A. Jewell (hyperpolymath) -->
 
-# Contributing to jaffaScript
+# Contributing to JaffaScript
 
 This is a **brand-surface repo**. The compiler, type checker, borrow checker,
 codegen, and face transformer all live in
