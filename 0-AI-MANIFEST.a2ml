@@ -1,61 +1,41 @@
-# RSR Template AI Manifest (Read First)
+# jaffascriptFace AI Manifest
+# Face repository for AffineScript
 
-This is the root AI manifest for the template repository.
+This is the AI manifest for jaffascriptFace, a face (syntax surface) for AffineScript.
 
-## Template Status
+## Repository Purpose
 
-This repository intentionally contains template placeholders before bootstrap.
-Examples: `hyperpolymath`, `jaffascript`, `{{PROJECT_NAME}}`, `[YOUR-REPO-NAME]`.
+jaffascriptFace provides a jaffascript-style syntax surface for AffineScript.
+It is a **brand surface only** - thin distribution layer.
 
-Do not invent project-specific values unless the operator runs template
-initialization (for example `just init`) or explicitly provides values.
+The actual compiler, type checker, borrow checker, and codegen live in:
+https://github.com/hyperpolymath/affinescript
 
-## Authority Split
+## Face Information
 
-- Central protocol authority:
-  `standards/session-management-standards/`
-- Local integration authority (this repo):
-  - `Justfile` session recipes
-  - `session/dispatch.sh`
-  - `session/custom-checks.k9`
-  - `session/local-hooks.sh`
-  - `coordination.k9`
+- Face name: jaffascript
+- CLI shim: bin/jaffa
+- Face pragma: // face: jaffascript
+- Transformer: affinescript/lib/jaffascript_face.ml (to be implemented in affinescript repo)
 
-## Canonical Session Commands
+## Language Mapping
 
-- `intake repo <path>`
-- `checkpoint change <path>`
-- `verify maintenance <path>`
-- `verify substantial <path>`
-- `verify release <path>`
-- `close planned <path>`
-- `close urgent <path>`
-- `recover repo <path>`
-- `handover full <path>`
-- `handover split <path>`
-- `handover model <path>`
-- `handover human <path>`
+This face maps jaffascript-style syntax to canonical AffineScript.
+See EXPLAINME.adoc for detailed terminology mapping.
 
-## Core Invariants
+## Status
 
-1. Keep protocol text centralized; do not duplicate full protocol specs here.
-2. Keep local policy and hook behavior local to this repo.
-3. Write runtime session artifacts in working repos (typically `.session/`).
-4. Keep README/AUDIT/manifest claims synchronized with actual files.
-5. Mark stubs and placeholders explicitly.
+Alpha. The face transformer is implemented (or will be) in the main affinescript repository.
+This repo contains examples, documentation, and CLI shim only.
 
-## Key Local Files
+## AI Assistant Guidelines
 
-- `AUDIT.adoc` (local audit gate summary)
-- `README.adoc` (template orientation)
-- `EXPLAINME.adoc` (claim-to-implementation map)
-- `session/README.md` (session-binding usage)
-- `.machine_readable/` (machine-readable repo policy/state files)
+When answering questions about jaffascriptFace:
+1. Clarify if the question is about syntax (this repo) or semantics (affinescript repo)
+2. For language features: explain how they map to AffineScript
+3. For bugs: direct to affinescript repo unless it's face-specific
+4. Always reference EXPLAINME.adoc for terminology differences
 
-## Startup Checklist For Agents
+## License
 
-1. Read `0-AI-MANIFEST.a2ml`.
-2. Read `AUDIT.adoc`.
-3. Confirm whether placeholders have been initialized.
-4. Use canonical session commands through `session/dispatch.sh` or Just aliases.
-5. Avoid claiming files/paths exist unless verified in this repository.
+MPL-2.0. See LICENSE file.

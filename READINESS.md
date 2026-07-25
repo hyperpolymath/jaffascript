@@ -1,10 +1,10 @@
 <!--
-SPDX-License-Identifier: CC-BY-SA-4.0
+SPDX-License-Identifier: MPL-2.0
 Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 -->
 <!-- Copyright (c) 2026 Jonathan D.A. Jewell (hyperpolymath) <j.d.a.jewell@open.ac.uk> -->
 
-# jaffascript Component Readiness Assessment
+# rattlescript Component Readiness Assessment
 
 **Standard:** [Component Readiness Grades (CRG) v2.2](https://github.com/hyperpolymath/standards/tree/main/component-readiness-grades)
 **Current Grade:** C
@@ -25,7 +25,7 @@ Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 
 ## Grade C Evidence
 
-- Deployed and dogfooded on the jaffascript project itself
+- Deployed and dogfooded on the rattlescript project itself
 - CI passing (dogfood-gate, hypatia-scan, static-analysis-gate)
 - TEST-NEEDS.md documents test matrix
 - No home failures

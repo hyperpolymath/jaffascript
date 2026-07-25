@@ -2,7 +2,7 @@
 # Source directory: contractiles
 # Re-generate with: contractile gen-just --dir contractiles
 #
-# SPDX-License-Identifier: MPL-2.0
+# SPDX-License-Identifier: PMPL-1.0-or-later
 
 # === DUST (Recovery & Rollback) ===
 # Source: Dustfile.a2ml

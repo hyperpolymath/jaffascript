@@ -1,78 +1,89 @@
-// SPDX-License-Identifier: CC-BY-SA-4.0
+// SPDX-License-Identifier: MPL-2.0
 // Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
-= RSR Template Repo - Explainme
-image:https://img.shields.io/badge/License-MPL_2.0-blue.svg[License: MPL-2.0,link="https://opensource.org/licenses/MPL-2.0"]
-
+// SPDX-FileCopyrightText: 2024-2026 Jonathan D.A. Jewell (hyperpolymath)
+= JaffaScript - Face Repository
 :toc:
 :icons: font
 
-This file explains how the key template claims map to real files.
+JaffaScript is a **face** (syntax surface) for link:https://github.com/hyperpolymath/affinescript[AffineScript].
+This document explains the repository structure and key concepts.
 
-== Central Session Protocol Authority
+== What is a "Face"?
 
-Claim:
-Session protocols are centrally maintained and not duplicated in this template.
+A face is a sugared surface syntax that lets developers approach AffineScript semantics
+through a familiar programming style. JaffaScript provides JavaScript/TypeScript-style
+syntax, but all faces compile to the same canonical AST and produce identical typed-wasm output.
 
-How this is implemented:
+Key principle: *Different faces, same cube.*
 
-* The local dispatcher (`session/dispatch.sh`) maps canonical commands to central
-  protocol paths in `standards/session-management-standards`.
-* Local files (`session/custom-checks.k9`, `session/local-hooks.sh`,
-  `coordination.k9`) are integration-only.
+== Repository Structure
 
-Caveat:
+[cols="1,2"]
+|===
+|Path |Purpose
 
-* If `SESSION_STANDARDS_DIR` is unset and no adjacent standards checkout exists,
-  the dispatcher records the command but cannot resolve central checklist paths.
+|`bin/jaffa` |CLI shim that forwards to `affinescript --face jaffa`
+|`examples/` |JaffaScript examples showing face-specific syntax
+|`docs/` |JaffaScript-focused documentation
+|`tests/` |Face transformer regression tests
+|`justfile` |Common tasks: `check`, `run`, `build`, `preview`, `lint`
+|`.github/` |GitHub workflows and issue templates
+|===
 
-== Canonical Command Surface
+== Key Concepts for JavaScript/TypeScript Developers
 
-Claim:
-Template bindings align to one canonical command model.
+[cols="1,2"]
+|===
+|JaffaScript |What it means in AffineScript
 
-How this is implemented:
+|`function f() {}` |Function declaration (lowers to canonical `fn`)
+|`const x = ...` |Immutable binding (lowers to `let`)
+|`let x = ...` |Mutable binding (lowers to `let mut`)
+|`import {x} from "mod"` |Module import (lowers to `use` statement)
+|`===` and `!==` |Equality comparison (lowers to `==` and `!=`)
+|`null` / `undefined` |Unit value `()` in semantics-relevant positions
+|`// face: jaffascript` |Pragma declaring this file uses JaffaScript syntax
+|===
 
-* `Justfile` provides thin aliases (`intake-repo`, `checkpoint-change`,
-  `verify-maintenance`, `verify-substantial`, `verify-release`, `close-planned`,
-  `close-urgent`, `recover-repo`, `handover-*`).
-* Every alias calls `session/dispatch.sh` with canonical verb-object pairs.
+WARNING: `null` and `undefined` in JavaScript/TypeScript are distinct from AffineScript's
+unit type `()`. The face transformer handles this mapping, but be aware that AffineScript
+has no null values — every value is guaranteed to be present and valid.
 
-Caveat:
+== Terminology Differences
 
-* Recipes are wrappers only. They do not replace protocol content from
-  the central standards repo.
+[cols="1,2"]
+|===
+|JavaScript/TypeScript term |AffineScript equivalent
 
-== Runtime State Is Local
+|`undefined` |Unit `()` - absence of a meaningful value
+|`null` |Unit `()` - absence of a meaningful value
+|`any` type |Not applicable - AffineScript has no type escape hatches
+|`void` return type |`()` unit return type
+|`interface` |`type` or `record` (AffineScript uses structural typing)
+|`class` |`type` with methods (AffineScript has no OOP inheritance)
+|`async`/`await` |Not applicable - use AffineScript effects (`-{IO}->`)
+|`Promise<T>` |Not applicable - use AffineScript effects and `Result` types
+|`=>` arrow function |`fn` or `->` (canonical syntax)
+|`this` |Not applicable - AffineScript has no object orientation
+|`new` |Not applicable - AffineScript has no constructors
+|`static` |Not applicable - AffineScript has no classes
+|`private`/`public`/`protected` |Not applicable - AffineScript uses module system for encapsulation
+|===
 
-Claim:
-Session state is per-repository runtime output, not standards text.
+== Getting Help
 
-How this is implemented:
+* Language questions: https://github.com/hyperpolymath/affinescript[affinescript repo]
+* JaffaScript-specific questions: https://github.com/hyperpolymath/jaffascript[This repo]
+* "How do I express X in AffineScript?": Check the canonical examples in affinescript/examples/
 
-* `session/dispatch.sh` writes command and continuity-core capture stubs to
-  `.session/LAST-CANONICAL-COMMAND.md` in the target repository path.
+== See Also
 
-Caveat:
-
-* Runtime files are intentionally lightweight and require human/agent completion.
-
-== Template Token Policy
-
-Claim:
-Placeholders are explicit template content until initialization.
-
-How this is implemented:
-
-* `README.adoc` and bootstrap recipes keep `{{TOKEN}}` placeholders visible.
-* `just init` performs token replacement.
-
-Caveat:
-
-* Uninitialized placeholders must not be treated as project-specific truth.
-
+* link:README.adoc[README] - Main documentation
+* link:https://github.com/hyperpolymath/affinescript[AffineScript] - Core compiler
+* link:https://github.com/hyperpolymath/affinescript/blob/main/examples/faces/README.adoc[Faces comparison]
 
 == License
 
 This project is licensed under the Mozilla Public License, v. 2.0. See the `LICENSE` file for details.
 
-SPDX-License-Identifier: CC-BY-SA-4.0
+SPDX-License-Identifier: MPL-2.0
