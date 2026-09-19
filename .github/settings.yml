@@ -7,13 +7,13 @@
 # applied by the probot/settings app when changes are pushed to the default
 # branch. Install the app at: https://github.com/apps/settings
 #
-# Template file — replace jaffascript and {{DESCRIPTION}} with actual values.
+# Template file — replace jaffascript and JavaScript/TypeScript-syntax AffineScript — affine resource guarantees + typed-wasm output for JS/TS-shaped code with actual values.
 
 # ─── Repository Settings ───────────────────────────────────────────────────────
 
 repository:
   name: "jaffascript"
-  description: "{{DESCRIPTION}}"
+  description: "JavaScript/TypeScript-syntax AffineScript — affine resource guarantees + typed-wasm output for JS/TS-shaped code"
   homepage: "https://github.com/hyperpolymath/jaffascript"
   private: false
   has_issues: true
