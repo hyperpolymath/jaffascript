@@ -1,0 +1,233 @@
+// SPDX-License-Identifier: CC-BY-SA-4.0
+// SPDX-FileCopyrightText: 2026 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+= AFFIRMATION: JaffaScript, as of 2026-10-07
+Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+:toc: macro
+:toclevels: 2
+:icons: font
+:std-docs: https://github.com/hyperpolymath/standards/blob/main/docs
+
+_This file states what was true and checkable at one commit, and how it was checked._
+
+[NOTE]
+====
+An affirmation is a dated declaration of what we believe is true. This one is
+profile A (evidential) of the
+link:{std-docs}/AFFIRMATION-STANDARD.adoc[AFFIRMATION standard]. It belongs
+with `README.adoc` and `EXPLAINME.adoc`:
+
+[cols="1,3,2",options="header"]
+|===
+| File | Answers | Tense
+| `README.adoc` | Where is this going, and why? | future
+| `EXPLAINME.adoc` | How is it built, and what is the evidence? | descriptive
+| `docs/AFFIRMATION.adoc` (this file) | What was true and checkable at one commit? | a frozen instant
+|===
+
+This file is optional. Delete it rather than keep it unverified, because a
+stale affirmation is worse than none.
+====
+
+toc::[]
+
+== What this is, and how it works
+
+*What it is.* A dated, signed record of what can be claimed about
+*JaffaScript* at one exact commit. It makes no promises about the future; the
+README covers that.
+
+*What the project is.* JavaScript/TypeScript-syntax AffineScript. JaffaScript
+is AffineScript with its `jaffa` face pre-selected. This repository carries no
+compiler. Its executable surface is `bin/jaffa`, a shim that finds the
+`affinescript` compiler and injects `--face jaffa`, plus examples and docs.
+
+*How it stays trustworthy.* Every claim below comes from running the shim and
+the repository's test scripts in the session that wrote this file. The anchor
+names the exact commit. A signed git commit lands the file.
+
+== The epistemic contract
+
+This file records our best belief at the timestamp below. It does not guarantee
+correctness. It does guarantee no intentional overclaim: a recipe that only
+prints "passed" is reported as such, not as evidence.
+
+You may conclude that:
+
+* every claim below was produced by running the tool at the anchor commit, not
+  copied from memory or from a status document.
+
+You may *not* conclude that:
+
+* anything is true at a later commit;
+* anything this file does not list passes. Silence is not a claim.
+
+Anyone may challenge any claim here with a counter-example or a failing run.
+
+[#verifiable-anchor]
+== Verifiable anchor
+
+[cols="1,2", options="header"]
+|===
+| Field | Contents
+
+| Repo
+| `hyperpolymath/jaffascript`
+
+| Branch
+| `main`
+
+| Commit (HEAD)
+| `465cec698878c4eaf427c073e3c5e4b21c0f5f68`
+
+| Permalink
+| https://github.com/hyperpolymath/jaffascript/tree/465cec698878c4eaf427c073e3c5e4b21c0f5f68
+
+| Verified (UTC)
+| `2026-10-07T10:27:03Z`
+
+| Working-tree delta at verification
+| `clean`. A detached worktree at `origin/main`; `git status --short` was empty.
+
+| Toolchain
+| `affinescript` 0.1.1. This is a *local build*, not a release: built from
+  `hyperpolymath/affinescript` commit
+  `fefac21f935551581e60915c204a49ecec1c142e` on the branch
+  `fix/token-permissions-id-20260911`, with 35 uncommitted files in that
+  checkout. GNU bash 5.2.37, on Debian 13 (WSL2, Linux 6.18.33.2).
+|===
+
+[WARNING]
+====
+If you are reading this at a later commit, these claims may no longer hold.
+Re-run the steps in <<reproduce>> and write a new affirmation. Do not rely on a
+stale one.
+====
+
+== Companion documents and repo metadata
+
+[cols="1,3", options="header"]
+|===
+| Item | State at the anchor
+
+| `README.adoc`
+| Present. Its opening paragraph matches the GitHub description.
+
+| `EXPLAINME.adoc`
+| Present.
+
+| GitHub description
+| "JavaScript/TypeScript-syntax AffineScript…", checked against the README
+  on 2026-10-07.
+
+| GitHub topics
+| 18 topics, present.
+|===
+
+== The honest state
+
+=== What is solid, and how we checked
+
+[cols="2,1,3", options="header"]
+|===
+| Claim | Result | Command
+
+| The shim type-checks the shipped example through the jaffa face
+| "Type checking passed", rc=0
+| `bin/jaffa check examples/hello.affine`
+
+| The shim compiles the example to WebAssembly
+| rc=0, 315 bytes, starts with the `\0asm` magic
+| `bin/jaffa compile examples/hello.affine -o hello.wasm`
+
+| The checker rejects a planted unresolved name (negative control)
+| "Resolution error: Cannot find name 'undefinedThing'", non-zero exit
+| `bin/jaffa check bad.affine`
+
+| Workflow validation
+| "Workflow validation PASSED (with 20 recommendations)", rc=0
+| `bash tests/workflows/validate_workflows_test.sh`
+|===
+
+=== The nuance you must not lose
+
+* All the real work happens in AffineScript. These results show that the shim
+  reaches a working compiler and that the jaffa face accepts the example. They
+  say nothing about the compiler's own test suite.
+* The toolchain is an unreleased local build from a dirty branch (see
+  <<verifiable-anchor>>). A release build may behave differently.
+
+=== Known gaps, stated in the repo
+
+* The capitalised `Justfile` still carries template recipes. `test`,
+  `test-smoke`, `e2e`, `aspect`, `bench` and `lint` print "passed" or contain
+  only `TODO` comments, and run nothing. *They are not evidence*, and this file
+  cites none of them.
+
+[#outstanding]
+=== Outstanding, weak or refuted
+
+* *The README's `eval` example fails.* `bin/jaffa eval examples/hello.affine`
+  (also README lines 68 and 72) ends with "Runtime error: Unhandled effect:
+  println" and a non-zero exit. The example declares an `IO` effect that the
+  interpreter does not handle. `check` and `compile` succeed on the same file.
+* *`just` cannot run here.* The root has both `Justfile` and `justfile`, and
+  `just` refuses with "multiple candidate justfiles found". Neither the
+  template recipes nor the small `justfile` (`check`, `run`, `build`, `hello`)
+  can be called through `just` until one file is removed.
+* *Aspect test: one false positive.* `bash tests/aspect_tests.sh` gives PASS=2,
+  FAIL=1. The FAIL, "Dangerous proof patterns found", matches lines that
+  *forbid* those patterns: `verification/proofs/README.adoc` lists `sorry`,
+  `Admitted` and `unsafeCoerce` as banned, and `TypeSafety.v` says "NO
+  Admitted allowed". The scanner cannot tell a ban from a use.
+* *`tests/e2e.sh` checks nothing.* It exits 0 with PASS=0 FAIL=0 SKIP=0. It is
+  still the uncustomised template.
+* *Red CI at the anchor.* Of 8 check runs on this commit, 6 succeeded, 1 was
+  skipped and 1 failed: `governance / Check Workflow Staleness`. It is not a
+  required check; issue #66 tracks it.
+
+[#reproduce]
+== Reproduce it yourself
+
+[source,bash]
+----
+git clone https://github.com/hyperpolymath/jaffascript
+cd jaffascript
+git checkout 465cec698878c4eaf427c073e3c5e4b21c0f5f68
+# needs an affinescript build on PATH, or AFFINESCRIPT=/path/to/affinescript
+bin/jaffa check examples/hello.affine                 # expect: Type checking passed
+bin/jaffa compile examples/hello.affine -o hello.wasm # expect: rc=0
+bin/jaffa eval examples/hello.affine                  # expect: Unhandled effect: println
+bash tests/workflows/validate_workflows_test.sh
+bash tests/aspect_tests.sh                            # expect: PASS=2 FAIL=1
+----
+
+== One-line characterisation
+
+At `465cec6`, the JaffaScript shim drives a local AffineScript 0.1.1 build to
+type-check and compile its example to WebAssembly, and rejects a planted
+error. The README's `eval` example fails, `just` cannot run because two
+justfiles exist, and the template test recipes are not evidence.
+
+== Joint attestation
+
+We assert that, to the best of our joint belief at the timestamp above, every
+claim in this file is true and was checked as described. The open gaps are
+stated, not hidden.
+
+* *Engineering party (AI):* Claude Opus 5.5 (`claude-opus-5-5`) ran the checks
+  recorded here at `2026-10-07T10:27:03Z`. It stands behind the wording above as
+  a faithful report of those runs.
+* *Owner / maintainer:* Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk> signs
+  by committing this file with `-S`. The git commit signature over this
+  content, at the commit SHA recorded above, is the cryptographic form of this
+  affirmation.
+
+[source,bash]
+----
+git commit -S -s docs/AFFIRMATION.adoc -m "docs: affirm state at 465cec698878c4eaf427c073e3c5e4b21c0f5f68"
+git log --show-signature -1
+----
+
+The file is landed by a signed git commit. Check with `git log --show-signature`
+that the anchor SHA above matches the parent of the commit that introduced this
+affirmation. If they do not match, read this file as a draft.
