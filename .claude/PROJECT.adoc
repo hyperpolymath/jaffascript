@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: CC-BY-SA-4.0
 == Jaffascript - Claude Code Instructions
 
 This repository contains the Jaffascript project.
