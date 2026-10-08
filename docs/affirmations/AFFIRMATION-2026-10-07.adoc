@@ -1,14 +1,22 @@
 // SPDX-License-Identifier: CC-BY-SA-4.0
 // SPDX-FileCopyrightText: 2026 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
-= AFFIRMATION: JaffaScript, as of 2026-10-08
+= AFFIRMATION: JaffaScript, as of 2026-10-07
 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 :toc: macro
 :toclevels: 2
 :icons: font
 :std-docs: https://github.com/hyperpolymath/standards/blob/main/docs
+:status: DRAFT — agent-authored, NOT affirmed by the owner
 
-_This file states what was true and checkable at one commit, and how it was
-checked._
+_This file states what was true and checkable at one commit, and how it was checked._
+
+[IMPORTANT]
+.Status: DRAFT. Not affirmed by the owner
+====
+An agent wrote and committed this file. The owner has not yet affirmed it. Until the owner
+re-anchors it and lands it with a signed `git commit -S`, treat every claim below as an
+agent report, not as the owner's affirmation.
+====
 
 [NOTE]
 ====
@@ -22,14 +30,11 @@ with `README.adoc` and `EXPLAINME.adoc`:
 | File | Answers | Tense
 | `README.adoc` | Where is this going, and why? | future
 | `EXPLAINME.adoc` | How is it built, and what is the evidence? | descriptive
-| `docs/AFFIRMATION.adoc` (this file) | What was true and checkable at one
-  commit? | a frozen instant
+| `docs/AFFIRMATION.adoc` (this file) | What was true and checkable at one commit? | a frozen instant
 |===
 
 This file is optional. Delete it rather than keep it unverified, because a
-stale affirmation is worse than none. The previous version, an agent-authored
-draft that the owner never affirmed, is kept at
-`docs/affirmations/AFFIRMATION-2026-10-07.adoc`.
+stale affirmation is worse than none.
 ====
 
 toc::[]
@@ -58,7 +63,7 @@ prints "passed" is reported as such, not as evidence.
 You may conclude that:
 
 * every claim below was produced by running the tool at the anchor commit, not
-  copied from memory, from a status document or from the previous affirmation.
+  copied from memory or from a status document.
 
 You may *not* conclude that:
 
@@ -81,33 +86,23 @@ Anyone may challenge any claim here with a counter-example or a failing run.
 | `main`
 
 | Commit (HEAD)
-| `085e513599a93b5b6bf45cf8fdb40f2318923dcf`
+| `465cec698878c4eaf427c073e3c5e4b21c0f5f68`
 
 | Permalink
-| https://github.com/hyperpolymath/jaffascript/tree/085e513599a93b5b6bf45cf8fdb40f2318923dcf
+| https://github.com/hyperpolymath/jaffascript/tree/465cec698878c4eaf427c073e3c5e4b21c0f5f68
 
 | Verified (UTC)
-| `2026-10-08T17:50:17Z` to `2026-10-08T18:34:42Z`. The shim, test and
-  `just` runs at 17:50:17Z; the CI read at 17:50:33Z; the direct
-  `affinescript eval` at 17:50:50Z; the full aspect match count at
-  17:58:24Z; the exit-status re-check at 18:34:42Z
+| `2026-10-07T10:27:03Z`
 
 | Working-tree delta at verification
-| `clean`. A fresh worktree at `origin/main`. `git status --short` was empty
-  before and after the runs; the build output and the planted control were
-  written outside the repo. The 18:34:42Z re-check ran in the same worktree,
-  at a commit that differs from the anchor only in the two affirmation
-  files; `bin/`, `examples/` and `tests/` were identical to the anchor.
+| `clean`. A detached worktree at `origin/main`; `git status --short` was empty.
 
 | Toolchain
-| `affinescript` 0.1.1, found on `PATH` as `/usr/local/bin/affinescript`.
-  This is a *local build*, not a release. The link points into the
-  `hyperpolymath/affinescript` checkout, whose binary was built at
-  `2026-10-06T15:20:27Z`. On 2026-10-08 that checkout was at commit
+| `affinescript` 0.1.1. This is a *local build*, not a release: built from
+  `hyperpolymath/affinescript` commit
   `fefac21f935551581e60915c204a49ecec1c142e` on the branch
-  `fix/token-permissions-id-20260911`, with 35 uncommitted files. Which of
-  those changes the binary includes cannot be read from the binary itself.
-  GNU bash 5.2.37, on Debian 13 (WSL2, Linux 6.18.33.2).
+  `fix/token-permissions-id-20260911`, with 35 uncommitted files in that
+  checkout. GNU bash 5.2.37, on Debian 13 (WSL2, Linux 6.18.33.2).
 |===
 
 [WARNING]
@@ -130,11 +125,11 @@ stale one.
 | Present.
 
 | GitHub description
-| "JavaScript/TypeScript-syntax AffineScript…", read live on 2026-10-08 and
-  checked against the README.
+| "JavaScript/TypeScript-syntax AffineScript…", checked against the README
+  on 2026-10-07.
 
 | GitHub topics
-| 18 topics, read live on 2026-10-08.
+| 18 topics, present.
 |===
 
 == The honest state
@@ -154,19 +149,12 @@ stale one.
 | `bin/jaffa compile examples/hello.affine -o hello.wasm`
 
 | The checker rejects a planted unresolved name (negative control)
-| "Resolution error: Cannot find name 'undefinedThing'", rc=124 (the
-  CLI's own error exit, see below)
-| `bin/jaffa check "$T/bad.affine"`, where `$T` is a scratch directory
-  outside the repo and `bad.affine` is the example with
-  `println(greeting);` changed to `println(undefinedThing);`
+| "Resolution error: Cannot find name 'undefinedThing'", non-zero exit
+| `bin/jaffa check bad.affine`
 
 | Workflow validation
 | "Workflow validation PASSED (with 20 recommendations)", rc=0
 | `bash tests/workflows/validate_workflows_test.sh`
-
-| The only required check on `main`, `scan / gitleaks`, passed on the anchor
-| success
-| check runs on the anchor commit
 |===
 
 === The nuance you must not lose
@@ -174,14 +162,8 @@ stale one.
 * All the real work happens in AffineScript. These results show that the shim
   reaches a working compiler and that the jaffa face accepts the example. They
   say nothing about the compiler's own test suite.
-* `rc=124` is the `affinescript` CLI's own exit status for a rejected
-  program, not a `timeout` kill: no timeout wrapper was used. The CLI also
-  exits 124 for an unknown flag.
 * The toolchain is an unreleased local build from a dirty branch (see
   <<verifiable-anchor>>). A release build may behave differently.
-* The only change between the previous anchor (`465cec6`) and this one is
-  `docs/AFFIRMATION.adoc` itself. The repository content measured here is the
-  same.
 
 === Known gaps, stated in the repo
 
@@ -193,30 +175,24 @@ stale one.
 [#outstanding]
 === Outstanding, weak or refuted
 
-* *The README's `eval` examples fail.* `bin/jaffa eval examples/hello.affine`
-  (README line 72) and `affinescript eval --face jaffa examples/hello.affine`
-  (README line 68) both end with "Runtime error: Unhandled effect: println"
-  and rc=124 (the CLI's error exit). The example declares an `IO` effect
-  that the interpreter does not handle. `check` and `compile` succeed on the
-  same file.
+* *The README's `eval` example fails.* `bin/jaffa eval examples/hello.affine`
+  (also README lines 68 and 72) ends with "Runtime error: Unhandled effect:
+  println" and a non-zero exit. The example declares an `IO` effect that the
+  interpreter does not handle. `check` and `compile` succeed on the same file.
 * *`just` cannot run here.* The root has both `Justfile` and `justfile`, and
-  `just --list` refuses with "multiple candidate justfiles found" (rc=1).
-  Neither the template recipes nor the small `justfile` (`check`, `run`,
-  `build`, `hello`) can be called through `just` until one file is removed.
-* *Aspect test: a false positive.* `bash tests/aspect_tests.sh` gives PASS=2,
-  FAIL=1 (rc=1). The FAIL, "Dangerous proof patterns found", rests on 8
-  matching lines, all of which *forbid* those patterns (the script prints
-  only the first 5, through `head -5`). Under "Banned Patterns",
-  `proofs/README.adoc` lists `sorry`, `Admitted` and `unsafeCoerce`, and
-  `coq/TypeSafety.v` says "NO Admitted allowed". The scanner cannot tell a
-  ban from a use. Each line matches twice, 4 in `verification/proofs/` and 4
-  in a second tracked copy at `verification/verification/proofs/` (28 files
-  under `verification/verification/`).
+  `just` refuses with "multiple candidate justfiles found". Neither the
+  template recipes nor the small `justfile` (`check`, `run`, `build`, `hello`)
+  can be called through `just` until one file is removed.
+* *Aspect test: one false positive.* `bash tests/aspect_tests.sh` gives PASS=2,
+  FAIL=1. The FAIL, "Dangerous proof patterns found", matches lines that
+  *forbid* those patterns: `verification/proofs/README.adoc` lists `sorry`,
+  `Admitted` and `unsafeCoerce` as banned, and `TypeSafety.v` says "NO
+  Admitted allowed". The scanner cannot tell a ban from a use.
 * *`tests/e2e.sh` checks nothing.* It exits 0 with PASS=0 FAIL=0 SKIP=0. It is
   still the uncustomised template.
 * *Red CI at the anchor.* Of 8 check runs on this commit, 6 succeeded, 1 was
   skipped and 1 failed: `governance / Check Workflow Staleness`. It is not a
-  required check; issue #66 (open) tracks it.
+  required check; issue #66 tracks it.
 
 [#reproduce]
 == Reproduce it yourself
@@ -225,24 +201,20 @@ stale one.
 ----
 git clone https://github.com/hyperpolymath/jaffascript
 cd jaffascript
-git checkout 085e513599a93b5b6bf45cf8fdb40f2318923dcf
+git checkout 465cec698878c4eaf427c073e3c5e4b21c0f5f68
 # needs an affinescript build on PATH, or AFFINESCRIPT=/path/to/affinescript
-bin/jaffa check examples/hello.affine    # expect: Type checking passed
-bin/jaffa compile examples/hello.affine -o hello.wasm   # expect: rc=0
-T=$(mktemp -d)
-sed 's/println(greeting);/println(undefinedThing);/' \
-  examples/hello.affine > "$T/bad.affine"
-bin/jaffa check "$T/bad.affine"  # expect: Resolution error, rc=124
-bin/jaffa eval examples/hello.affine     # expect: Unhandled effect: println
+bin/jaffa check examples/hello.affine                 # expect: Type checking passed
+bin/jaffa compile examples/hello.affine -o hello.wasm # expect: rc=0
+bin/jaffa eval examples/hello.affine                  # expect: Unhandled effect: println
 bash tests/workflows/validate_workflows_test.sh
-bash tests/aspect_tests.sh               # expect: PASS=2 FAIL=1
+bash tests/aspect_tests.sh                            # expect: PASS=2 FAIL=1
 ----
 
 == One-line characterisation
 
-At `085e513`, the JaffaScript shim drives a local AffineScript 0.1.1 build to
+At `465cec6`, the JaffaScript shim drives a local AffineScript 0.1.1 build to
 type-check and compile its example to WebAssembly, and rejects a planted
-error. The README's `eval` examples fail, `just` cannot run because two
+error. The README's `eval` example fails, `just` cannot run because two
 justfiles exist, and the template test recipes are not evidence.
 
 == Joint attestation
@@ -252,8 +224,8 @@ claim in this file is true and was checked as described. The open gaps are
 stated, not hidden.
 
 * *Engineering party (AI):* Claude Opus 5.5 (`claude-opus-5-5`) ran the checks
-  recorded here between `2026-10-08T17:50:17Z` and `2026-10-08T18:34:42Z`.
-  It stands behind the wording above as a faithful report of those runs.
+  recorded here at `2026-10-07T10:27:03Z`. It stands behind the wording above as
+  a faithful report of those runs.
 * *Owner / maintainer:* Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk> signs
   by committing this file with `-S`. The git commit signature over this
   content, at the commit SHA recorded above, is the cryptographic form of this
@@ -261,9 +233,7 @@ stated, not hidden.
 
 [source,bash]
 ----
-git commit -S -s docs/AFFIRMATION.adoc \
-  docs/affirmations/AFFIRMATION-2026-10-07.adoc \
-  -m "docs: affirm state at 085e513599a93b5b6bf45cf8fdb40f2318923dcf"
+git commit -S -s docs/AFFIRMATION.adoc -m "docs: affirm state at 465cec698878c4eaf427c073e3c5e4b21c0f5f68"
 git log --show-signature -1
 ----
 
