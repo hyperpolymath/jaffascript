@@ -26,7 +26,7 @@ Key principle: *Different faces, same cube.*
 |`examples/` |JaffaScript examples showing face-specific syntax
 |`docs/` |JaffaScript-focused documentation
 |`tests/` |Face transformer regression tests
-|`justfile` |Common tasks: `check`, `run`, `build`, `preview`, `lint`
+|`jaffa.just` |Common tasks, run as `just jaffa <task>`: `check`, `run`, `build`, `preview`, `lint`, `hello`
 |`.github/` |GitHub workflows and issue templates
 |===
 

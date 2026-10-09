@@ -73,9 +73,9 @@ affinescript compile --face jaffa examples/hello.affine -o hello.wasm
 ./bin/jaffa eval examples/hello.affine
 ./bin/jaffa compile examples/hello.affine -o hello.wasm
 
-# Or via the justfile:
-just run examples/hello.affine
-just preview examples/hello.affine    # show the canonical lowering
+# Or via the `jaffa` just module (jaffa.just):
+just jaffa run examples/hello.affine
+just jaffa preview examples/hello.affine    # show the canonical lowering
 ----
 
 Source files use the canonical `+.affine+` extension. The face is

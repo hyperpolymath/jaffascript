@@ -15,7 +15,7 @@ toolbox enter jaffascript-dev
 # Install dependencies manually
 
 # Verify setup
-just check   # or: cargo check / mix compile / etc.
+just jaffa check examples/hello.affine   # type-check an example
 just test    # Run test suite
 ```
 
