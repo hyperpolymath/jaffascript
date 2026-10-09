@@ -14,7 +14,7 @@ Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 
 ## License
 
-- SPDX: `PMPL-1.0-or-later` on all new files.
+- SPDX: `MPL-2.0` on code, `CC-BY-SA-4.0` on prose (`.adoc`, `.md`, docs), on all new files.
 - Never use AGPL-3.0.
 - Copyright: `Jonathan D.A. Jewell (hyperpolymath) <j.d.a.jewell@open.ac.uk>`
 

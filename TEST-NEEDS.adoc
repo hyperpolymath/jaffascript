@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: CC-BY-SA-4.0
 == TEST-NEEDS: rsr-template-repo
 
 === CRG Grade: C — ACHIEVED 2026-04-04
@@ -114,7 +115,7 @@ validation, benchmarks)
 documentation
 * *Author Attribution*: Jonathan D.A. Jewell
 6759885+hyperpolymath@users.noreply.github.com
-* *License*: PMPL-1.0-or-later on all new files
+* *License*: MPL-2.0 (code) or CC-BY-SA-4.0 (prose) on all new files
 * *Automation*: All scripts executable + working
 
 === FLAGGED ISSUES - ALL RESOLVED
