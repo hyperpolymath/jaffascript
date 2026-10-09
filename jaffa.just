@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: MPL-2.0
 # SPDX-FileCopyrightText: 2024-2026 Jonathan D.A. Jewell (hyperpolymath)
-# justfile — JaffaScript task runner
+# jaffa.just — JaffaScript task runner, a module of the root Justfile: `just jaffa <recipe>`
 
 default:
-    @just --list
+    @just --list jaffa
 
 # Type-check a file
 check FILE:

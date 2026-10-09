@@ -37,7 +37,7 @@
 .gitattributes text eol=lf
 .editorconfig  text eol=lf
 .tool-versions text eol=lf
-justfile       text eol=lf
+*.just         text eol=lf
 Makefile       text eol=lf
 Containerfile  text eol=lf
 

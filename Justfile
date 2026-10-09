@@ -18,6 +18,9 @@ set positional-arguments := true
 # Re-generate with: contractile gen-just
 import? "contractile.just"
 
+# JaffaScript task runner (check, run, build, preview, lint, hello): `just jaffa <recipe>`
+mod? jaffa "jaffa.just"
+
 # Project metadata — customize these
 project := "rsr-template-repo"
 OWNER := "hyperpolymath"
