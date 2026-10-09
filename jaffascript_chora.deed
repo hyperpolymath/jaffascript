@@ -1,0 +1,339 @@
+;; SPDX-License-Identifier: MPL-2.0
+;
+; The repo deed of jaffascript (one deed per repo: standards#837, owner ruling
+; 2026-09-19). It is read by scripts/deed-field.sh and checked by
+; `just validate-rsr` / `just validate-state` (build/just/validate.just).
+;
+; What it carries, and from where:
+; - identity, clade, forges, lineage and status: .machine_readable/CLADE.a2ml,
+;   field for field (standards 1-formats/deed/mappings/clade-to-repo-deed.adoc).
+; - maturity and ecosystem: .machine_readable/6a2/STATE.a2ml and ECOSYSTEM.a2ml
+;   (meta-ecosystem-to-repo-deed.adoc).
+; - meta: .machine_readable/6a2/META.a2ml plus the maintenance model that
+;   policies/MAINTENANCE-AXES.a2ml states.
+; - anchor: .machine_readable/anchors/ANCHOR.a2ml.
+; - policies: the cross-repo maintenance policies, in the deed form
+;   rsr-template-repo_chora.deed gives them (jaffascript's policy .a2ml files
+;   are copies of the template's).
+;
+; What it does not carry yet: the canon pin, the ply/manifest tree, agentic,
+; neurosym, playbook, ensaid, bot-directives, integrations and rsr-profile.
+; Those records stay where they are until the A2ML conversion front end exists
+; (D313); this deed is not a bulk hand conversion. The .a2ml files are still in
+; the tree, so `just validate-rsr` reports no-a2ml as MISSING until then.
+(repo-deed
+  :schema-version "1.0.0"
+  :canonical-name "jaffascript"
+  :beholding-chora #u5"estate/chora"
+  ; uuid5(URL, "github.com/hyperpolymath/jaffascript") is the uuid that
+  ; CLADE.a2ml records; `scripts/deed-field.sh --uuid` derives it.
+  :repo-uuid #u5"github.com/hyperpolymath/jaffascript"
+  ; >>> repo-identity
+  (identity
+    :primary-forge github
+    :owner "hyperpolymath"
+    :prefixed-name "rm-jaffascript")
+  ; Carried as CLADE.a2ml records it. The clade should name the project's core
+  ; value proposition; a language face reads as nl (Nextgen Languages), not rm.
+  ; Changing it also changes :prefixed-name and the registration, so it is the
+  ; owner's call, not this conversion's.
+  (clade
+    :primary rm
+    :primary-name "Repo Management & Tooling"
+    :secondary (gv)
+    :assigned "2026-03-16"
+    :rationale "")
+  (forges
+    :github "hyperpolymath/jaffascript"
+    :gitlab "hyperpolymath/jaffascript"
+    :bitbucket "hyperpolymath/jaffascript")
+  ; CLADE.a2ml gave parent = "RSR template — scaffold for new repos". :parent
+  ; names a monorepo parent only, so the template goes in :instantiated-from.
+  (lineage
+    :type standalone
+    :parent ""
+    :born "2026-03-16"
+    :previous-names ()
+    :instantiated-from "rsr-template-repo")
+  (status
+    :phase active
+    :since "2026-03-16"
+    :present #t
+    :aliases ()
+    :merged-into ""
+    :superseded-by ""
+    :successors ()
+    :ended ""
+    (history
+      (entry :phase active :since "2026-03-16" :note "backfilled default — correct if the true phase differs")))
+  (maturity
+    :level alpha)
+  (ecosystem
+    :project "jaffascript"
+    :ecosystem "hyperpolymath"
+    :position-type "language-face"
+    :purpose "jaffascript-style syntax face for AffineScript providing familiar syntax for jaffascript developers"
+    :not ("a compiler"
+          "a type checker or borrow checker"
+          "a code generator")
+    (related :name "affinescript" :relationship build-tooling :notes "The compiler, type checker and codegen. bin/jaffa runs affinescript with the jaffa face selected.")
+    (related :name "rsr-template-repo" :relationship minted-from :notes "The template this repo was created from."))
+  ; <<< repo-identity
+  (meta
+    :version "0.1.0"
+    :last-updated "2026-10-09"
+    :type face-repo
+    :category "syntax-surface"
+    :license MPL-2.0
+    :author "Jonathan D.A. Jewell (hyperpolymath)"
+    :build-tool just
+    :ci-platform github-actions
+    :scoping-first #t
+    :execution-order "axis-1 > axis-2 > axis-3"
+    :axis-1 "must > intend > like"
+    :axis-2 "corrective > adaptive > perfective"
+    :axis-3 "systems > compliance > effects"
+    (scoping
+      :sources "README, roadmap, status docs, maintenance checklist, CI/security docs"
+      :marker-scan "TODO/FIXME/XXX/HACK/STUB/PARTIAL"
+      :idris-unsound-scan "believe_me/assert_total")
+    :corrective-first #t
+    :adaptive-second #t
+    :adaptive-focus "scope-change reconciliation, stale-reference removal, obsolete-work culling"
+    :perfective-third #t
+    :perfective-source "axis-1 honest state after corrective/adaptive updates"
+    (axis-3
+      :audit-focus "systems in place, documentation explains actual state, safety/security accounted for, observed effects reviewed"
+      :compliance-focus "seams/compromises/exception register, bounded exceptions, anti-drift checks"
+      :effects-evidence "benchmark execution/results and maintainer status dialogue/review"))
+  ; ANCHOR.a2ml still holds the template's unfilled {{PROJECT_*}} placeholders
+  ; in [identity]; the values below come from README.adoc. Its
+  ; [implementation-policy], [golden-path], [satellite-policy] and
+  ; [semantic-authority-files] are the template's defaults (they name Rust and
+  ; Idris2, `just test`, and SPECIFICATION.md, none of which apply here), so
+  ; they are not carried. Stating them for this repo is the owner's call.
+  (anchor
+    :schema "hyperpolymath.anchor/1"
+    :repo "hyperpolymath/jaffascript"
+    :authority "upstream-canonical"
+    :purpose (
+      "Define canonical semantics and policy boundaries for this repository."
+      "Declare what downstream/satellite repos can extend but not redefine."
+      "Provide a stable golden path and invariant contract for release readiness."
+      )
+    (metadata
+      :version "1.0.0"
+      :last-updated "2026-10-09")
+    (identity
+      :project "jaffascript"
+      :kind "language"
+      :one-sentence "JavaScript / TypeScript-syntax AffineScript: AffineScript with its jaffa face pre-selected."
+      :domain "AffineScript faces"))
+  (policies
+    ; Canonical maintenance governance model
+    (maintenance-axes
+      (metadata
+        :version "1.0.0"
+        :last-updated "2026-10-09"
+        :scope "repo")
+      (discovery
+        :human-entrypoints (
+          "README.adoc"
+          "docs/governance/MAINTENANCE-CHECKLIST.adoc"
+          "docs/governance/SOFTWARE-DEVELOPMENT-APPROACH.adoc"
+          )
+        :machine-entrypoints (
+          "*_chora.deed (policies (maintenance-axes))"
+          "*_chora.deed (policies (maintenance-checklist))"
+          "*_chora.deed (policies (software-development-approach))"
+          "*_chora.deed"
+          ".machine_readable/ai/README.adoc"
+          "*_chora.deed (bot-directives)"
+          )
+        :bots ("hypatia" "gitbot-fleet" "repo visitors"))
+      (axes
+        :axis-1 "must > intend > like"
+        :axis-2 "corrective > adaptive > perfective"
+        :axis-3 "systems > compliance > effects"
+        :execution-order "axis-1 > axis-2 > axis-3")
+      (axis-1-scoping
+        :required #t
+        :sources "README, roadmap, status docs, maintenance checklist, CI/security docs"
+        :markers "TODO/FIXME/XXX/HACK/STUB/PARTIAL"
+        :idris-unsound-markers "believe_me/assert_total"
+        :output "scoped work assembly in must/intend/like buckets")
+      (axis-2-maintenance
+        :corrective-first #t
+        :adaptive-second #t
+        :adaptive-focus "scope changes, stale references, obsolete work culling"
+        :perfective-third #t
+        :perfective-source "honest state from axis-1 after corrective/adaptive updates")
+      (axis-3-audit
+        :systems-check #t
+        :compliance-check #t
+        :effects-check #t
+        :compliance-focus "seams/compromises/exception register and anti-drift"
+        :compliance-tooling "panic-attack"
+        :effects-tooling "ecological checking with sustainabot guidance"
+        :effects-evidence "benchmark evidence and maintainer dialogue/status review"))
+    ; Cross-repo maintenance baseline (machine-readable canonical)
+    (maintenance-checklist
+      (metadata
+        :version "1.1.0"
+        :last-updated "2026-02-24"
+        :scope "cross-repo"
+        :source-human "docs/governance/MAINTENANCE-CHECKLIST.adoc"
+        :companion-human "docs/governance/SOFTWARE-DEVELOPMENT-APPROACH.adoc"
+        :companion-machine "*_chora.deed (policies (software-development-approach))")
+      (policy
+        :single-source #t
+        :notes "Use this clause as canonical machine policy and keep the AsciiDoc synchronized.")
+      (maintenance-axes
+        :scoping-first #t
+        :execution-order ("scoping" "axis-1" "axis-2" "axis-3")
+        :axis-1 "must > intend > like"
+        :axis-2 "corrective > adaptive > perfective"
+        :axis-3 "systems > compliance > effects")
+      (scoping
+        :inputs_required (
+          "README"
+          "roadmap"
+          "status-docs"
+          "maintenance-checklist"
+          "ci-and-security-docs"
+          )
+        :marker_scan_required ("TODO" "FIXME" "XXX" "HACK" "STUB" "PARTIAL")
+        :idris_unsound_scan_required ("believe_me" "assert_total")
+        :scope_assembly_buckets ("must" "intend" "like"))
+      (axis-2-maintenance-rules
+        :corrective-first #t
+        :adaptive-second #t
+        :adaptive_examples (
+          "scope-change reconciliation"
+          "stale-reference removal"
+          "obsolete-work culling"
+          )
+        :perfective-third #t
+        :perfective_source "axis-1 honest state after corrective/adaptive updates")
+      (axis-3-audit-rules
+        :systems-check #t
+        :documentation-honesty-check #t
+        :safety-security-accounted-check #t
+        :effects-review-check #t
+        :benchmark-evidence-required #t
+        :maintainer-dialogue-review-required #t
+        :compliance-seams-check #t
+        :exception-register-required #t
+        :exception-bounded-scope-required #t
+        :policy-drift-contamination-check #t
+        :example-drift-risk "single TypeScript exception causing broad ->TypeScript migration"
+        :compliance-tooling "panic-attack"
+        :effects-tooling "ecological checking with sustainabot guidance")
+      (generic-cleanup-finish-off
+        :root-cleanup-required #t
+        :stale-work-cull-required #t
+        :docs-parity-required #t
+        :machine-human-sync-required #t
+        :compliance-finish-off-required #t
+        :effects-finish-off-required #t
+        :release-prep-summary-required #t
+        :next-actions-required ("corrective" "adaptive" "perfective"))
+      (must
+        :root_control_files (
+          ".gitignore"
+          ".gitattributes"
+          ".editorconfig"
+          ".tool-versions"
+          "Containerfile"
+          "Justfile"
+          )
+        :root_hosting_files ("CNAME" ".nojekyll")
+        :ownership_files ("MAINTAINER" ".github/CODEOWNERS")
+        :machine_readable_required (
+          "*_chora.deed (anchor)"
+          ".machine_readable/contractiles/"
+          ".machine_readable/ai/"
+          ".machine_readable/bot_directives/"
+          )
+        :contractiles_required (
+          ".machine_readable/contractiles/must/"
+          ".machine_readable/contractiles/trust/"
+          ".machine_readable/contractiles/intend/"
+          )
+        :security_required ("www/.well-known/security.txt" "ci-security-scan")
+        :quality_gate_required (
+          "format"
+          "lint"
+          "unit-tests"
+          "integration-tests"
+          "p2p-tests"
+          "e2e-tests"
+          "bench-smoke"
+          "docs-check"
+          "security-scan"
+          )
+        :abi_ffi_policy ("ABI Idris2 in src/interface/abi/*.idr" "FFI Zig in ffi/**/*.zig"))
+      (should
+        :docs_primary_format "adoc"
+        :docs_structure (
+          "docs/theory"
+          "docs/practice"
+          "docs/whitepapers/academic"
+          "docs/whitepapers/industry"
+          "docs/proofs"
+          "docs/reports"
+          )
+        :root_minimization #t
+        :well_known_metadata #t
+        :roadmap_honesty_with_dates #t
+        :ci_doc_format_policy #t)
+      (could
+        :generate_human_from_machine #t
+        :mode_aware_bots ("corrective" "adaptive" "perfective" "audit")
+        :topology_dashboard #t
+        :exception_registry #t))
+    ; General software development approach (machine-readable)
+    (software-development-approach
+      (metadata
+        :version "1.0.0"
+        :last-updated "2026-02-24"
+        :scope "cross-repo"
+        :source-human "docs/governance/SOFTWARE-DEVELOPMENT-APPROACH.adoc")
+      (execution
+        :order ("axis-1" "axis-2" "axis-3"))
+      (axis-1
+        :name "scope"
+        :priority "must > intend > like"
+        :inputs ("README" "roadmap" "status-docs" "ci-and-security-docs")
+        :marker-scan ("TODO" "FIXME" "XXX" "HACK" "STUB" "PARTIAL")
+        :idris-unsound-scan ("believe_me" "assert_total")
+        :output "scoped-work-assembly")
+      (axis-2
+        :name "maintenance"
+        :priority "corrective > adaptive > perfective"
+        :corrective "defect/regression/safety/security fixes"
+        :adaptive "scope reconciliation, stale-reference removal, obsolete-work culling"
+        :perfective "quality improvements derived from axis-1 honest state")
+      (axis-3
+        :name "audit"
+        :priority "systems > compliance > effects"
+        :systems "required systems present and operating"
+        :compliance "exceptions explicit, bounded, and drift-resistant"
+        :effects "benchmark/operational impact evidence captured and reviewed"
+        :compliance-tooling "panic-attack"
+        :effects-tooling "ecological checking with sustainabot guidance")
+      (cleanup-finish-off
+        :root-cleanup #t
+        :stale-work-cull #t
+        :docs-sync-human-machine #t
+        :compliance-audit #t
+        :effects-audit #t
+        :release-summary ("must" "should" "could")
+        :next-actions ("corrective" "adaptive" "perfective"))
+      (collaboration
+        :maintainer-dialogue-required #t
+        :dialogue-topics ("what changed" "why" "remaining risks")))
+    ; Component Readiness Grades (CRG v1.0) — the machine-readable grade
+    ; standard; the human companion is docs/governance/CRG-CRITERIA.adoc.
+  )
+)
