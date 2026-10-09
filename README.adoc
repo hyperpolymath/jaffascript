@@ -35,10 +35,6 @@ strongly-typed, affine-typed, WASM-targeting world
 ----
 // face: jaffascript
 
-effect IO {
-  fn println(s: String) -> ();
-}
-
 function main() -{IO}-> () {
   const greeting = "Hello, JaffaScript!";
   println(greeting);

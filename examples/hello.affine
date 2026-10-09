@@ -5,10 +5,11 @@
 // `const`/`let` bindings (let lowers to let mut), brace-delimited
 // blocks, `===` equality.
 // face: jaffascript
-
-effect IO {
-  fn println(s: String) -> ();
-}
+//
+// `println` is the AffineScript builtin, which already carries the `IO`
+// effect. Do not declare `effect IO { fn println … }` here: a declared
+// effect shadows the builtin, and `eval` then stops with
+// "Unhandled effect: println" because nothing handles it.
 
 function main() -{IO}-> () {
   const greeting = "Hello, JaffaScript!";
