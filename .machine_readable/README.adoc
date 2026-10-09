@@ -1,3 +1,5 @@
 // SPDX-License-Identifier: MPL-2.0
 // Machine-readable metadata and configuration for RSR compliance.
 // See: https://github.com/hyperpolymath/rsr-template-repo
+// Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+= .machine_readable Pillar
