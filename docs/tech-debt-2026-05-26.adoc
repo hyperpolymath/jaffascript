@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: CC-BY-SA-4.0
 == Tech-Debt Audit — jaffascript — 2026-05-26
 
 *Source:* estate-wide automated scan 2026-05-26. *Companion:*

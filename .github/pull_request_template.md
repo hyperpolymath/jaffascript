@@ -35,7 +35,7 @@ Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 - [ ] Documentation updated for user-facing changes
 - [ ] `TOPOLOGY.md` updated (if architecture changed)
 - [ ] `CHANGELOG` or release notes updated
-- [ ] New dependencies reviewed for license compatibility (PMPL-1.0-or-later / MPL-2.0)
+- [ ] New dependencies reviewed for license compatibility (code MPL-2.0 / prose CC-BY-SA-4.0)
 - [ ] ABI/FFI changes validated (`src/interface/abi/` and `src/interface/ffi/` consistent)
 
 ## Testing
