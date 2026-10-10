@@ -118,7 +118,7 @@ The template Justfile provides:
 * **Cookbook generation**: `just cookbook` -> `docs/just-cookbook.adoc`
 * **Man page generation**: `just man` -> `docs/man/project.1`
 * **RSR validation**: `just validate-rsr`
-* **STATE.a2ml management**: `just state-touch`, `just state-phase`
+* **Repository deed state**: `just state-phase` shows lifecycle phase and maturity
 * **Container support**: `just container-build`, `just container-push`
 * **CI matrix**: `just ci-matrix [stage] [depth]`
 

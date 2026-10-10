@@ -875,7 +875,7 @@ nix-shell:
 automate task="all":
     #!/usr/bin/env bash
     case "{{task}}" in
-        all) just fmt && just lint && just test && just docs && just state-touch ;;
+        all) just fmt && just lint && just test && just docs ;;
         cleanup) just clean && find . -name "*.orig" -delete && find . -name "*~" -delete ;;
         update) just deps && just validate ;;
         *) echo "Unknown: {{task}}. Use: all, cleanup, update" && exit 1 ;;

@@ -73,8 +73,8 @@ self-assess:
         echo "  ✗ .machine_readable/descriptiles/ — MISSING (RSR violation!)"
     fi
 
+    WF_COUNT=$({ find .github/workflows -maxdepth 1 \( -name '*.yml' -o -name '*.yaml' \) 2>/dev/null || true; } | wc -l)
     if [ -d ".github/workflows" ]; then
-        WF_COUNT=$(ls .github/workflows/*.yml 2>/dev/null | wc -l)
         echo "  ✓ .github/workflows/ — KEEP ($WF_COUNT workflows, RSR CI/CD)"
     fi
     echo ""
@@ -260,7 +260,7 @@ verify:
     check_either "CHANGELOG.md" "CHANGELOG.adoc"
 
     # Check at least 1 workflow exists
-    WORKFLOW_COUNT=$(find .github/workflows -name '*.yml' -o -name '*.yaml' 2>/dev/null | wc -l)
+    WORKFLOW_COUNT=$({ find .github/workflows -name '*.yml' -o -name '*.yaml' 2>/dev/null || true; } | wc -l)
     if [ "$WORKFLOW_COUNT" -eq 0 ]; then
         echo "  FAIL: No workflows in .github/workflows/"
         ERRORS=$((ERRORS + 1))
