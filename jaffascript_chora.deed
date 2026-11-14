@@ -24,10 +24,10 @@
 (repo-deed
   :schema-version "1.0.0"
   :canonical-name "jaffascript"
-  :beholding-chora #u5"estate/chora"
+  :beholding-chora #u8"chora:estate/github.com/hyperpolymath"
   ; uuid5(URL, "github.com/hyperpolymath/jaffascript") is the uuid that
   ; CLADE.a2ml records; `scripts/deed-field.sh --uuid` derives it.
-  :repo-uuid #u5"github.com/hyperpolymath/jaffascript"
+  :repo-uuid #u8"gv-clade-index:github.com/hyperpolymath/jaffascript"
   ; >>> repo-identity
   (identity
     :primary-forge github
