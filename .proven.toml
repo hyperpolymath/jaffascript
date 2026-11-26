@@ -1,0 +1,61 @@
+# SPDX-License-Identifier: MPL-2.0
+# Manifest for this repository (schema proven/manifest/v1); see
+# hyperpolymath/proven-cicd-and-workflows docs/PROVEN-ADOPTION.adoc.
+#
+# jaffascript is at scaffold stage: src/core and src/bridges hold only manifest
+# files, and src/interface/ffi is the uninstantiated RSR template. The root
+# Justfile `build`/`test` recipes are `echo "... passed"` placeholders and
+# tests/e2e.sh asserts nothing (PASS=0 FAIL=0), so none of them is used as
+# evidence. Everything below is a dated waiver, not N/A: real tests are
+# expected once the implementation lands.
+schema = "proven/manifest/v1"
+
+[languages.ignore.idris2]
+reason = "Idris2 ABI and proof sources; umbrella release 0.1 provisions no Idris2 toolchain"
+
+[languages.ignore.agda]
+reason = "verification/proofs/agda/Properties.agda is a proof skeleton; no Agda toolchain in umbrella release 0.1"
+
+[languages.ignore.coq]
+reason = "verification/proofs/coq/TypeSafety.v is a proof skeleton; no Coq toolchain in umbrella release 0.1"
+
+[languages.ignore.lean]
+reason = "verification/proofs/lean4/ApiTypes.lean is a proof skeleton; no Lean toolchain in umbrella release 0.1"
+
+[languages.ignore.tla]
+reason = "verification/proofs/tlaplus/StateMachine.tla is a specification skeleton; no TLA+ toolchain in umbrella release 0.1"
+
+# ---- zig ---------------------------------------------------------------------
+# Verified locally with Zig 0.15.2: src/interface/ffi/build.zig builds nothing
+# and has no test step, and src/main.zig still contains the {{project}}
+# template placeholder (syntax error).
+[categories.unit.zig.waiver]
+reason = "src/interface/ffi is the uninstantiated template: main.zig still contains {{project}} placeholders and build.zig has no test step"
+until = "2027-01-15"
+
+[categories.smoke.zig.waiver]
+reason = "no runnable artefact yet; see unit"
+until = "2027-01-15"
+
+[categories.build.zig.waiver]
+reason = "build.zig builds nothing and the FFI source does not parse (template placeholders); see unit"
+until = "2027-01-15"
+
+[categories.p2p.zig.waiver]
+reason = "no implementation and no seam to test yet; see unit"
+until = "2027-01-15"
+
+# ---- shell -------------------------------------------------------------------
+[categories.unit.shell.waiver]
+reason = "the only shell tests are scaffold checks: tests/aspect_tests.sh currently fails (it flags words in verification/proofs/README.adoc) and tests/e2e.sh asserts nothing; no real tests exist until the implementation lands"
+until = "2027-01-15"
+
+[categories.smoke.shell.waiver]
+reason = "no smoke test exists; the Justfile test-smoke recipe is a TODO placeholder"
+until = "2027-01-15"
+
+[categories.build.shell]
+na = "interpreted scripts, nothing to compile"
+
+[categories.p2p.shell]
+na = "scripts are independent scaffolding with no inter-component seam"
