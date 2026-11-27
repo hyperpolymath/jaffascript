@@ -15,7 +15,7 @@ This repo follows the hyperpolymath standard. See `https://github.com/hyperpolym
 The full policy is canonical in `hyperpolymath/standards`. Key points:
 
 - **AffineScript** - Primary application code (compiles to typed-wasm)
-- **Bun** - Runtime & package management, tier 1 (replaces Node/npm/Deno)
+- **Bun** - Runtime & package management, tier 1 (replaces Node/yarn; Deno, pnpm, npm as fallbacks)
 - **Rust/SPARK** - Performance-critical, systems, WASM, CLI tools
 - **Zig** - FFI layer, memory-safe systems
 - **Idris2** - Formal verification
